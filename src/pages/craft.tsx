@@ -271,7 +271,7 @@ const Craft: React.FC = () => {
             </IonGrid>
             </div>
             <div hidden={block} id="block">
-              This can only be opened on and after the 25th of December :o
+              This can only be opened on and after the 25th of December :)
             </div>
           </IonContent>
         </IonPage>
