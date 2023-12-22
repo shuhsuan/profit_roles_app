@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'profit_roles_app',
+  appId: 'come.galaxies.mycoolapp',
+  appName: 'A-Choux',
   webDir: 'dist',
   server: {
     androidScheme: 'https'

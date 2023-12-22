@@ -20,9 +20,11 @@ import Salt from "../assets/salt.png";
 import Sugar from "../assets/Sugar.png";
 import Flour from "../assets/flour.png";
 import Egg from "../assets/egg.png";
-import Cream from "../assets/cream.png";
+import Cream from "../assets/Milk.png";
 import Choco from "../assets/choco.png";
-import Point from "../assets/point.png"
+import Point from "../assets/point.png";
+import Present from "../assets/present.gif"
+import Click from '../assets/click.mp3'
 
 const INTRO_KEY = "intro-seen";
 
@@ -40,6 +42,8 @@ const Craft: React.FC = () => {
   const [egg, setEgg] = useState(true)
   const [cream, setCream] = useState(true)
   const [choco, setChoco] = useState(true)
+  const [invite, setInvite] = useState(true)
+  const [block, setBlock] = useState(true)
 
 
   useEffect(() => {
@@ -60,6 +64,24 @@ const Craft: React.FC = () => {
     Preferences.remove({ key: INTRO_KEY });
   };
 
+  const doThing = () => {
+    const date = Date.now();
+    const today = new Date(date);
+    const test = today.getDate()
+
+    if(test > 25)
+    {
+      invite? setInvite(false):setInvite(true);
+    }
+    else{
+      block? setBlock(false):setBlock(true);
+    }
+  }
+
+  const playAudio = () => {
+    new Audio(Click).play()
+  }
+
   return (
     <>
       {!introSeen ? (
@@ -74,7 +96,7 @@ const Craft: React.FC = () => {
               </IonRow>
               <IonRow id="craft-row-top">
                 <IonCol size="2">
-                  <img id="craft" src={Water} onClick={()=>{water? setWater(false):setWater(true)}}></img>
+                  <img id="craft" src={Water} onClick={()=>{water?setWater(false):setWater(true)}}></img>
                 </IonCol>
                 <IonCol size="2">
                   <img id="craft" src={Butter} onClick={() => {butter? setButter(false):setButter(true)}}></img>
@@ -116,7 +138,7 @@ const Craft: React.FC = () => {
                     <IonRow id="card-row">
                       <IonCol id="card-col" size="4"><img id="card-img" src={Butter}/></IonCol>
                       <IonCol id="el-col">
-                        <IonRow className="ion-justify-content-center" id="el-name">Unseasoned butter churn</IonRow>
+                        <IonRow className="ion-justify-content-center" id="el-name">Unseasoned dairy churn</IonRow>
                         <IonRow className="ion-justify-content-center" id="el-quant">100g</IonRow>
                       </IonCol>
                     </IonRow>
@@ -220,6 +242,37 @@ const Craft: React.FC = () => {
             <IonButton id="exit" onClick={seeIntroAgain}>
               X
             </IonButton>
+            <div id="cont"><img onClick={doThing} id="present" src={Present}></img></div>
+            <div hidden={invite}>
+            <IonGrid id="invite">
+              <IonRow>
+                <IonCol>
+               I extend unto thee an invitation to attend the grand and most holy occasion of:
+            <p id="mormon">The book of mormon</p>
+            The event shall unfold as follows -<br/><br/>
+            <b>Date:</b> 13th March 2023 <br/>
+            <b>Hour:</b> 19:30 <br/>
+            <b>Venue:</b> Prince of Wales Theatre <br/>
+            <b>Address:</b> Coventry street, London, W1D 6AS<br/><br/>
+
+<p id="rsvp">R.S.V.P.</p>
+            Pray, confirm thy presence or absence by some-time-in-the-future via messenger raven to one Shu, from that room, in that house.<br/>
+
+            <p id="rsvp">Attire</p>
+            None, or mayhaps garments adorned like those from the isles of Hawaii?<br/>
+
+            <p id="rsvp">Additional Tidings</p>
+            In the nearby realm, there doth dwell several taverns that boast succulent fowl offerings (read: chicken wings). Might thou be inclined to partake in a repast ere the event? <br/>
+            <br/><br/>
+            In ship and mirth, I remain,<br/> 
+            Shu.
+                </IonCol>
+                </IonRow>
+            </IonGrid>
+            </div>
+            <div hidden={block} id="block">
+              This can only be opened on and after the 25th of December :o
+            </div>
           </IonContent>
         </IonPage>
       )}
